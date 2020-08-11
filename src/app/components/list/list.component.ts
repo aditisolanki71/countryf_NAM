@@ -33,4 +33,14 @@ export class ListComponent implements OnInit {
     this.countryService.setter(country);
     this.router.navigate(['/createUpdate']);
   }
+  doDelete(country) {
+    this.countryService.deleteCountry(country._id).subscribe(
+      data => {
+        this.countries.splice(this.countries.indexOf(country),1)
+      },
+      error => {
+        console.log('err',error);
+      }
+    )
+  }
 }
