@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../../shared/country.service'
 import { Country } from '../../country';
+import { Router} from '@angular/router';
+
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
@@ -9,14 +11,14 @@ import { Country } from '../../country';
 export class ListComponent implements OnInit {
 
   public countries:Country[];
-  constructor(private _countryService:CountryService) { }
+  constructor(private router:Router,private countryService:CountryService) { }
 
   ngOnInit(): void {
     this.readCountries();
   } 
 
   readCountries() {
-    this._countryService.readCountries().subscribe(
+    this.countryService.readCountries().subscribe(
       data => {
         console.log('data',data)
         this.countries = data['msg'];
@@ -25,5 +27,10 @@ export class ListComponent implements OnInit {
         console.log('err',error)
       }
     )
+  }
+
+  doUpdate(country) {
+    this.countryService.setter(country);
+    this.router.navigate(['/createUpdate']);
   }
 }

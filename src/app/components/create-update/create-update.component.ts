@@ -18,15 +18,27 @@ export class CreateUpdateComponent implements OnInit {
   }
 
   createOrUpdate() {
-    this.countryService.createCountry(this.country).subscribe(
-      data => {
-        console.log('create data',data);
-        this.router.navigate(['/']);
-      },
-      error => {
-        console.log('err',error);
-      }
+    if(this.country._id === undefined) {
+      this.countryService.createCountry(this.country).subscribe(
+        data => {
+          console.log('create data',data);
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log('err',error);
+        }
       )
+    }
+    else {
+      this.countryService.updateCountry(this.country).subscribe(
+        data => {
+          console.log('update data',data);
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log('err',error);
+        })
+    }
   }
 
 }
