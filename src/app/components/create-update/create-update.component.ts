@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router} from '@angular/router';
+import { CountryService} from '../../shared/country.service';
+import {Country} from '../../country';
 
 @Component({
   selector: 'app-create-update',
@@ -7,9 +10,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateUpdateComponent implements OnInit {
 
-  constructor() { }
+  public country:Country;
+  constructor(private countryService:CountryService,private router:Router) { }
 
   ngOnInit(): void {
+    this.country = this.countryService.getter();
+  }
+
+  createOrUpdate() {
+    this.countryService.createCountry(this.country).subscribe(
+      data => {
+        console.log('create data',data);
+        this.router.navigate(['/']);
+      },
+      error => {
+        console.log('err',error);
+      }
+      )
   }
 
 }

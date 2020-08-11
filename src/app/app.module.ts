@@ -8,6 +8,7 @@ import { CreateUpdateComponent } from './components/create-update/create-update.
 import { ListComponent } from './components/list/list.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { CountryService } from './shared/country.service'
+import { FormsModule } from '@angular/forms';
 const appRoutes:Routes= [
   {path: '', component: ListComponent},
   {path: 'createUpdate', component: CreateUpdateComponent},
@@ -23,6 +24,7 @@ const appRoutes:Routes= [
     HttpClientModule,
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes)
   ],
   providers: [CountryService],

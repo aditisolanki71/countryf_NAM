@@ -6,6 +6,7 @@ import { Country } from '../country'
 })
 export class CountryService {
 
+  private country:Country;
   private baseUri:string="http://localhost:8080"
   private headers = new HttpHeaders().set('Content-Type','application/json')
   constructor(private http:HttpClient) { }
@@ -21,5 +22,12 @@ export class CountryService {
   }
   deleteCountry(id:string) {
     return this.http.delete(this.baseUri+'/delete/'+id,{headers:this.headers});
+  }
+  setter(country:Country) {
+    this.country = country;
+  }
+
+  getter() {
+    return this.country;
   }
 }
